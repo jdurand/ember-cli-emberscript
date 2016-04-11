@@ -51,7 +51,7 @@
     "blueprints"
   ],
   "dependencies": {
-    "broccoli-ember-script": "~0.1.1",
+    "broccoli-ember-script": "git://github.com/jdurand/broccoli-ember-script",
     "broccoli-persistent-filter": "^1.1.0",
     "chalk": "^1.0.0",
     "ember-cli-version-checker": "^1.0.1",
