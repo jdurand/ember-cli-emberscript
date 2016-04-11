@@ -1,50 +1,26 @@
 module.exports = {
-  description: 'Generates a component. Name must contain a hyphen.',
+  normalizeEntityName: function(entityName) {
+    var trailingSlash = /(\/$|\\$)/;
 
-  availableOptions: [
-    {
-      name: 'path',
-      type: String,
-      default: 'components',
-      aliases: [
-        { 'no-path': '' }
-      ]
-    }
-  ],
-
-  fileMapTokens: function() {
-    var blueprint = this.lookupBlueprint('component');
-    return blueprint.fileMapTokens.apply(blueprint, arguments);
-  },
-
-  normalizeEntityName: function() {
-    var blueprint = this.lookupBlueprint('component');
-    return blueprint.normalizeEntityName.apply(blueprint, arguments);
-  },
-
-  locals: function() {
-    var blueprint = this.lookupBlueprint('component');
-    var locals = blueprint.locals.apply(blueprint, arguments);
-
-    // This is here to work around this bug in ember-cli:
-    // https://github.com/ember-cli/ember-cli/issues/4001
-    if (!this.project) {
-      return locals;
+    if(trailingSlash.test(entityName)) {
+      throw new Error('You specified "' + entityName + '", but you can\'t use a ' +
+                      'trailing slash as an entity name with generators. Please ' +
+                      're-run the command with "' + entityName.replace(trailingSlash, '') + '".\n');
     }
 
-    var newContents = '';
-    if (locals.contents) {
-      newContents = locals.contents + '\n';
+
+    if(! /\-/.test(entityName)) {
+      throw new Error('You specified "' + entityName + '", but in order to prevent ' +
+                      'clashes with current or future HTML element names you must have ' +
+                      'a hyphen.\n');
     }
 
-    var newImport = '';
-    if (locals.importTemplate) {
-      newImport = "`" + locals.importTemplate.replace(/;/, '`');
+    if(/\//.test(entityName)) {
+      throw new Error('You specified "' + entityName + '", but due to a bug in ' +
+                      'Handlebars (< 2.0) slashes within components/helpers are not ' +
+                      'allowed.\n');
     }
 
-    locals.contents = newContents;
-    locals.importTemplate = newImport;
-
-    return locals;
+    return entityName;
   }
 };

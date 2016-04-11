@@ -5,10 +5,10 @@ var chalk     = require('chalk');
 var checker   = require('ember-cli-version-checker');
 var defaults  = require('lodash').defaults;
 
-var CoffeePreprocessor = require('./lib/coffee-preprocessor');
+var EmberscriptPreprocessor = require('./lib/emberscript-preprocessor');
 
 module.exports = {
-  name: 'Ember CLI Coffeescript Addon',
+  name: 'Ember CLI Emberscript Addon',
 
   shouldSetupRegistryInIncluded: function() {
     return !checker.isAbove(this, '0.2.0');
@@ -16,12 +16,12 @@ module.exports = {
 
   getConfig: function() {
     var brocfileConfig = {};
-    var coffeeOptions = defaults(this.project.config(process.env.EMBER_ENV).coffeeOptions || {},
+    var emberscriptOptions = defaults(this.project.config(process.env.EMBER_ENV).emberscriptOptions || {},
       brocfileConfig, {
         blueprints: true
       });
 
-    return coffeeOptions;
+    return emberscriptOptions;
   },
 
   blueprintsPath: function() {
@@ -31,7 +31,7 @@ module.exports = {
   },
 
   setupPreprocessorRegistry: function(type, registry) {
-    var plugin = new CoffeePreprocessor(this.getConfig());
+    var plugin = new EmberscriptPreprocessor(this.getConfig());
 
     registry.add('js', plugin);
   },

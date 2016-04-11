@@ -1,15 +1,7 @@
 var inflection  = require('inflection');
 var stringUtils = require('../../lib/utilities/string');
-var EOL         = require('os').EOL;
 
 module.exports = {
-  description: 'Generates an ember-data model.',
-
-  anonymousOptions: [
-    'name',
-    'attr:type'
-  ],
-
   locals: function(options) {
     var attrs = [];
     var needs = [];
@@ -24,9 +16,9 @@ module.exports = {
 
       if (/has-many/.test(dasherizedType)) {
         var camelizedNamePlural = inflection.pluralize(camelizedName);
-        attrs.push(camelizedNamePlural + ': ' + dsAttr(dasherizedName, dasherizedType));
+        attrs.push(camelizedNamePlural + ': ' + dsAttr(camelizedName, dasherizedType));
       } else {
-        attrs.push(camelizedName + ': ' + dsAttr(dasherizedName, dasherizedType));
+        attrs.push(camelizedName + ': ' + dsAttr(camelizedName, dasherizedType));
       }
 
       if (/has-many|belongs-to/.test(dasherizedType)) {
@@ -34,7 +26,7 @@ module.exports = {
       }
     }
 
-    attrs = attrs.join('' + EOL + '  ');
+    attrs = attrs.join('\n  ');
     needs = '  needs: [' + needs.join(', ') + ']';
 
     return {

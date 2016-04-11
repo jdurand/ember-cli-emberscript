@@ -1,3 +1,1 @@
-module.exports = {
-  description: 'Generates a mixin.'
-};
+module.exports = {};

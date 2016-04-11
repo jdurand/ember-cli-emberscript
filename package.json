@@ -1,5 +1,5 @@
 {
-  "name": "ember-cli-coffeescript",
+  "name": "ember-cli-emberscript",
   "version": "1.13.2",
   "description": "Adds precompilation of CoffeeScript files and all the basic generation types to the `ember generate` command.",
   "directories": {
@@ -13,12 +13,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/kimroen/ember-cli-coffeescript"
+    "url": "git://github.com/jdurand/ember-cli-emberscript"
   },
   "bugs": {
-    "url": "https://github.com/kimroen/ember-cli-coffeescript/issues"
+    "url": "https://github.com/jdurand/ember-cli-emberscript/issues"
   },
-  "homepage": "https://github.com/kimroen/ember-cli-coffeescript",
+  "homepage": "https://github.com/jdurand/ember-cli-emberscript",
   "engines": {
     "node": ">= 0.10.0"
   },
@@ -47,14 +47,13 @@
   },
   "keywords": [
     "ember-addon",
-    "coffeescript",
+    "emberscript",
     "blueprints"
   ],
   "dependencies": {
-    "broccoli-coffee": "~0.6.0",
+    "broccoli-ember-script": "~0.1.1",
     "broccoli-persistent-filter": "^1.1.0",
     "chalk": "^1.0.0",
-    "coffeelint": "^1.6.1",
     "ember-cli-version-checker": "^1.0.1",
     "fs-extra": "^0.11.1",
     "ignore": "^3.0.9",
